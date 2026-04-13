@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { handelUserRegisterController ,handelUserLoginController,handelUserLogoutController} from "../controllers/auth.controller.js";
+import { handelUserRegisterController ,handelUserLoginController,handelUserLogoutController,handelGetmeController} from "../controllers/auth.controller.js";
+import { authUser } from "../middlewares/auth.middleware.js";
 const authRouter=Router();
 /**
  * @route POST /api/auth/register
@@ -21,6 +22,14 @@ authRouter.post("/login",handelUserLoginController)
  * @access public 
  */
 authRouter.get("/logout",handelUserLogoutController)
+
+/**
+ * @route get /api/auth/get-me
+ * @description Get details of loged in user 
+ * @access public 
+ */
+authRouter.get("/get-me",authUser,handelGetmeController)
+
 
 
 export {authRouter}

@@ -102,4 +102,21 @@ async function handelUserRegisterController(req,res) {
         massage:"User logout sussesfully"
     })
   }
-export {handelUserRegisterController,handelUserLoginController,handelUserLogoutController}
+    /**
+ * @name handelGetmeController
+ * @description get details of already loged in user 
+ * @access public 
+ */
+async function handelGetmeController(req,res) {
+    const user = await userModel.findById(req.user.id)
+    res.status(200).json({
+        message: "User details fetched successfully",
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email
+        }
+    })
+
+}
+export {handelUserRegisterController,handelUserLoginController,handelUserLogoutController,handelGetmeController}
